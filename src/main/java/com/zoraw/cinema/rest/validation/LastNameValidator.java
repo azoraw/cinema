@@ -16,7 +16,7 @@ public class LastNameValidator implements ConstraintValidator<LastName, String> 
     private boolean areAllPartsOfLastNameValid(String lastName) {
         String[] surnameParts = lastName.split("-");
         return Arrays.stream(surnameParts)
-                .allMatch(TextRules::isFirstLetterCapital);
+                .allMatch(TextRules::isFirstLetterCapitalAndRestLower);
     }
 
 

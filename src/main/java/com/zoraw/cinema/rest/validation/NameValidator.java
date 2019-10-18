@@ -9,7 +9,7 @@ public class NameValidator implements ConstraintValidator<Name, String> {
 
     @Override
     public boolean isValid(String name, ConstraintValidatorContext context) {
-        return TextRules.isFirstLetterCapital(name);
+        return TextRules.isFirstLetterCapitalAndRestLower(name);
     }
 
 }

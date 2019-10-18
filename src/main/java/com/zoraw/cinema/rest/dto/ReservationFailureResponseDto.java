@@ -8,21 +8,21 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class ReservationFailureResponseDtoDto extends ReservationResponseDto {
+public class ReservationFailureResponseDto extends ReservationResponseDto {
 
     private static final String TOO_LATE_DESCRIPTION = "TOO_LATE_DESCRIPTION";
     private static final String BAD_SEAT_CONFIGURATION_DESCRIPTION = "BAD_SEAT_CONFIGURATION_DESCRIPTION";
 
     private String failureDescription;
 
-    public static ReservationFailureResponseDtoDto createTooLateResponse() {
-        return ReservationFailureResponseDtoDto.builder()
+    public static ReservationFailureResponseDto createTooLateResponse() {
+        return ReservationFailureResponseDto.builder()
                 .failureDescription(TOO_LATE_DESCRIPTION)
                 .build();
     }
 
-    public static ReservationFailureResponseDtoDto createBadSeatConfigurationResponse(Screening screening) {
-        return ReservationFailureResponseDtoDto.builder()
+    public static ReservationFailureResponseDto createBadSeatConfigurationResponse(Screening screening) {
+        return ReservationFailureResponseDto.builder()
                 .screening(screening)
                 .failureDescription(BAD_SEAT_CONFIGURATION_DESCRIPTION)
                 .build();
