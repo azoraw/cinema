@@ -1,7 +1,7 @@
 package com.zoraw.cinema;
 
-import com.zoraw.cinema.config.ReservationProperties;
-import com.zoraw.cinema.config.TicketProperties;
+import com.zoraw.cinema.config.properties.ReservationProperties;
+import com.zoraw.cinema.config.properties.TicketProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

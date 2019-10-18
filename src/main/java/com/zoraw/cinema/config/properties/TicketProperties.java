@@ -1,4 +1,4 @@
-package com.zoraw.cinema.config;
+package com.zoraw.cinema.config.properties;
 
 import lombok.Getter;
 import lombok.Setter;
