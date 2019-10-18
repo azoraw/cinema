@@ -5,7 +5,7 @@ import com.zoraw.cinema.model.domain.Screening;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ScreeningMapper {
+public interface ScreeningDaoMapper {
     Screening toScreening(ScreeningDao screeningDao);
     ScreeningDao toScreeningDao(Screening screening);
 

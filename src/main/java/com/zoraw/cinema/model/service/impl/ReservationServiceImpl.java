@@ -1,8 +1,8 @@
 package com.zoraw.cinema.model.service.impl;
 
 import com.zoraw.cinema.model.domain.Reservation;
-import com.zoraw.cinema.model.domain.ReservationFailureResponse;
-import com.zoraw.cinema.model.domain.ReservationResponse;
+import com.zoraw.cinema.rest.dto.ReservationFailureResponseDtoDto;
+import com.zoraw.cinema.rest.dto.ReservationResponseDto;
 import com.zoraw.cinema.model.domain.Screening;
 import com.zoraw.cinema.model.service.ReservationCreationService;
 import com.zoraw.cinema.model.service.ReservationService;
@@ -26,24 +26,24 @@ class ReservationServiceImpl implements ReservationService {
     private final TicketPriceCalculationService ticketPriceCalculationService;
 
     @Override
-    public ReservationResponse create(Reservation reservation) {
+    public ReservationResponseDto create(Reservation reservation) {
         String screeningId = reservation.getScreeningId();
         Screening screening = screeningService.getScreening(screeningId);
 
         if (isReservationTooLate(screening)) {
-            return ReservationFailureResponse.createTooLateResponse();
+            return ReservationFailureResponseDtoDto.createTooLateResponse();
         }
 
         boolean saved = reservationCreationService.create(reservation);
 
         if (saved) {
-            return ReservationResponse.builder()
+            return ReservationResponseDto.builder()
                     .amount(ticketPriceCalculationService.calculateTotalAmount(reservation.getTickets()))
                     .expirationTime(screening.getTime().minusMinutes(minimumMinutesBeforeScreening))
                     .build();
         }
 
-        return ReservationFailureResponse.createBadSeatConfigurationResponse(screeningService.getScreening(screeningId));
+        return ReservationFailureResponseDtoDto.createBadSeatConfigurationResponse(screeningService.getScreening(screeningId));
     }
 
     private boolean isReservationTooLate(Screening screening) {

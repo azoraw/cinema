@@ -3,8 +3,8 @@ package com.zoraw.cinema.model.service.impl;
 import com.zoraw.cinema.model.db.mongo.ReservationRepository;
 import com.zoraw.cinema.model.db.mongo.ScreeningRepository;
 import com.zoraw.cinema.model.db.mongo.dao.ScreeningDao;
-import com.zoraw.cinema.model.db.mongo.mapper.ReservationMapper;
-import com.zoraw.cinema.model.db.mongo.mapper.ScreeningMapper;
+import com.zoraw.cinema.model.db.mongo.mapper.ReservationDaoMapper;
+import com.zoraw.cinema.model.db.mongo.mapper.ScreeningDaoMapper;
 import com.zoraw.cinema.model.domain.Reservation;
 import com.zoraw.cinema.model.domain.Screening;
 import com.zoraw.cinema.model.domain.Seat;
@@ -22,14 +22,14 @@ public class ReservationCreationServiceImpl implements ReservationCreationServic
 
     private final ScreeningRepository screeningRepository;
     private final ReservationRepository reservationRepository;
-    private final ReservationMapper reservationMapper;
-    private final ScreeningMapper screeningMapper;
+    private final ReservationDaoMapper reservationDaoMapper;
+    private final ScreeningDaoMapper screeningDaoMapper;
 
     @Override
     public boolean create(Reservation reservation) {
 
         ScreeningDao screeningDao = getScreening(reservation.getScreeningId());
-        Screening screening = screeningMapper.toScreening(screeningDao);
+        Screening screening = screeningDaoMapper.toScreening(screeningDao);
 
         Set<Seat> seatsToReserve = reservation.getSeats();
         if (screening.getRoom().canReserveSeats(seatsToReserve)) {
@@ -40,7 +40,7 @@ public class ReservationCreationServiceImpl implements ReservationCreationServic
             } catch (OptimisticLockingFailureException ex) {
                 this.create(reservation);
             }
-            reservationRepository.save(reservationMapper.toReservation(reservation));
+            reservationRepository.save(reservationDaoMapper.toReservationDao(reservation));
             return true;
         }
 
@@ -48,7 +48,7 @@ public class ReservationCreationServiceImpl implements ReservationCreationServic
     }
 
     private ScreeningDao getUpdatedScreening(Screening screening, Long version) {
-        ScreeningDao screeningDaoAfterUpdate = screeningMapper.toScreeningDao(screening);
+        ScreeningDao screeningDaoAfterUpdate = screeningDaoMapper.toScreeningDao(screening);
         screeningDaoAfterUpdate.setVersion(version);
         return screeningDaoAfterUpdate;
     }

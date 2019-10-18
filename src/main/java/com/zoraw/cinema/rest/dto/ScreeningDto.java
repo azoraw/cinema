@@ -1,4 +1,4 @@
-package com.zoraw.cinema.model.service.dto;
+package com.zoraw.cinema.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

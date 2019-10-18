@@ -2,7 +2,7 @@ package com.zoraw.cinema.rest;
 
 import com.zoraw.cinema.model.domain.Screening;
 import com.zoraw.cinema.model.service.ScreeningService;
-import com.zoraw.cinema.model.service.dto.MovieWithScreeningsDto;
+import com.zoraw.cinema.rest.dto.MovieWithScreeningsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

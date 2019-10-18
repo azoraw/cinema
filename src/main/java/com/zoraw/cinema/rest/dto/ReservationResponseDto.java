@@ -1,5 +1,6 @@
-package com.zoraw.cinema.model.domain;
+package com.zoraw.cinema.rest.dto;
 
+import com.zoraw.cinema.model.domain.Screening;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @SuperBuilder
-public class ReservationResponse {
+public class ReservationResponseDto {
 
     protected Screening screening;
     private BigDecimal amount;
