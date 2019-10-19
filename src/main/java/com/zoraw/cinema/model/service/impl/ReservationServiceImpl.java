@@ -38,7 +38,7 @@ class ReservationServiceImpl implements ReservationService {
 
         if (saved) {
             return ReservationResponseDto.builder()
-                    .amount(ticketPriceCalculationService.calculateTotalAmount(reservation.getTickets()))
+                    .amount(ticketPriceCalculationService.calculateTotalAmount(reservation.getTickets(), screening.getTime()))
                     .expirationTime(screening.getTime().minusMinutes(minimumMinutesBeforeScreening))
                     .build();
         }

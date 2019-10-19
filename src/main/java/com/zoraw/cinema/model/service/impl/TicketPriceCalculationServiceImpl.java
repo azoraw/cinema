@@ -2,38 +2,23 @@ package com.zoraw.cinema.model.service.impl;
 
 import com.zoraw.cinema.model.domain.TicketType;
 import com.zoraw.cinema.model.service.TicketPriceCalculationService;
-import org.springframework.beans.factory.annotation.Value;
+import com.zoraw.cinema.model.service.TicketPricesService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
-import java.util.EnumMap;
+import java.time.LocalDateTime;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @Service
 public class TicketPriceCalculationServiceImpl implements TicketPriceCalculationService {
 
-    @Value("${ticket.adult}")
-    private BigDecimal adult;
-
-    @Value("${ticket.student}")
-    private BigDecimal student;
-
-    @Value("${ticket.child}")
-    private BigDecimal child;
-
-    private EnumMap<TicketType, BigDecimal> prices;
-
-    @PostConstruct
-    private void initPriceMap() {
-        prices = new EnumMap<>(TicketType.class);
-        prices.put(TicketType.ADULT, adult);
-        prices.put(TicketType.STUDENT, student);
-        prices.put(TicketType.CHILD, child);
-    }
+    private final TicketPricesService ticketPricesService;
 
     @Override
-    public BigDecimal calculateTotalAmount(Map<TicketType, Integer> tickets) {
+    public BigDecimal calculateTotalAmount(Map<TicketType, Integer> tickets, LocalDateTime screeningTime) {
+        Map<TicketType, BigDecimal> prices = ticketPricesService.getPrices(screeningTime);
         return tickets.entrySet()
                 .stream()
                 .map(entry -> prices.get(entry.getKey()).multiply(BigDecimal.valueOf(entry.getValue())))

@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 
 @Getter
 @Setter
@@ -14,5 +15,10 @@ public class TicketProperties {
     private BigDecimal adult;
     private BigDecimal student;
     private BigDecimal child;
+    private BigDecimal weekendPriceOffSet;
+    private int weekendStartHour;
+    private DayOfWeek weekendStartDay;
+    private int weekendStopHour;
+    private DayOfWeek weekendStopDay;
 }
 

@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public interface TicketPriceCalculationService {
-
-    BigDecimal calculateTotalAmount(Map<TicketType, Integer> tickets, LocalDateTime screeningTime);
+public interface TicketPricesService {
+    Map<TicketType, BigDecimal> getPrices(LocalDateTime screeningTime);
 }
