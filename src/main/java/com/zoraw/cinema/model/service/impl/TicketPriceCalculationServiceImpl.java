@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -28,8 +29,8 @@ public class TicketPriceCalculationServiceImpl implements TicketPriceCalculation
         BigDecimal totalAmount = tickets.entrySet()
                 .stream()
                 .map(entry -> prices.get(entry.getKey()).multiply(BigDecimal.valueOf(entry.getValue())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, RoundingMode.HALF_UP);
         if (isVoucherValid(voucher)) {
             totalAmount = totalAmount.multiply(voucherDiscountInPercent)
                     .divide(percent, RoundingMode.HALF_UP);
@@ -38,6 +39,8 @@ public class TicketPriceCalculationServiceImpl implements TicketPriceCalculation
     }
 
     private boolean isVoucherValid(String voucher) {
-        return voucher.equals("valid");
+        return Optional.ofNullable(voucher)
+                .map(v -> v.equals("valid"))
+                .orElse(false);
     }
 }

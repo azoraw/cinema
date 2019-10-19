@@ -1,18 +1,18 @@
 package com.zoraw.cinema.rest.validation;
 
-import com.zoraw.cinema.model.domain.Reservation;
+import com.zoraw.cinema.rest.dto.ReservationDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ReservationValidator implements ConstraintValidator<ValidReservation, Reservation> {
+public class ReservationValidator implements ConstraintValidator<ValidReservation, ReservationDto> {
 
     @Override
-    public boolean isValid(Reservation reservation, ConstraintValidatorContext context) {
+    public boolean isValid(ReservationDto reservation, ConstraintValidatorContext context) {
         return reservation.getSeats().size() == getNumberOfAllTickets(reservation);
     }
 
-    private int getNumberOfAllTickets(Reservation reservation) {
+    private int getNumberOfAllTickets(ReservationDto reservation) {
         return reservation.getTickets()
                 .values()
                 .stream()
