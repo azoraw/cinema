@@ -1,0 +1,15 @@
+﻿{
+  "firstName": "Róża",
+  "lastName": "Kowalska",
+  "screeningId": "testId",
+  "seats": [
+    {
+      "row": "B",
+      "number": 4
+    }
+  ],
+  "tickets": {
+    "ADULT": 1
+  },
+  "voucher": "valid"
+}
