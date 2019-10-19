@@ -10,6 +10,7 @@ import com.zoraw.cinema.model.service.ScreeningService;
 import com.zoraw.cinema.model.service.TicketPriceCalculationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -34,8 +35,12 @@ class ReservationServiceImpl implements ReservationService {
         if (isReservationTooLate(screening)) {
             return ReservationFailureResponseDto.createTooLateResponse();
         }
-
-        boolean saved = reservationCreationService.create(reservation);
+        boolean saved = false;
+        try {
+            saved = reservationCreationService.create(reservation);
+        } catch (OptimisticLockingFailureException ex) {
+            this.create(reservation);
+        }
 
         if (saved) {
             return ReservationResponseDto.builder()

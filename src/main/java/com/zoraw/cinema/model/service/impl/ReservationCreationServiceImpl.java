@@ -11,8 +11,8 @@ import com.zoraw.cinema.model.domain.Seat;
 import com.zoraw.cinema.model.exception.ScreeningNotFoundException;
 import com.zoraw.cinema.model.service.ReservationCreationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -25,6 +25,7 @@ public class ReservationCreationServiceImpl implements ReservationCreationServic
     private final ReservationDaoMapper reservationDaoMapper;
     private final ScreeningDaoMapper screeningDaoMapper;
 
+    @Transactional
     @Override
     public boolean create(Reservation reservation) {
 
@@ -34,12 +35,7 @@ public class ReservationCreationServiceImpl implements ReservationCreationServic
         Set<Seat> seatsToReserve = reservation.getSeats();
         if (screening.getRoom().canReserveSeats(seatsToReserve)) {
             updateSeats(screening, seatsToReserve);
-
-            try {
-                screeningRepository.save(getUpdatedScreening(screening, screeningDao.getVersion()));
-            } catch (OptimisticLockingFailureException ex) {
-                this.create(reservation);
-            }
+            screeningRepository.save(getUpdatedScreening(screening, screeningDao.getVersion()));
             reservationRepository.save(reservationDaoMapper.toReservationDao(reservation));
             return true;
         }
