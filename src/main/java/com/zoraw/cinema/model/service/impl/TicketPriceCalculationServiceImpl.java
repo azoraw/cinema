@@ -26,16 +26,24 @@ public class TicketPriceCalculationServiceImpl implements TicketPriceCalculation
     @Override
     public BigDecimal calculateTotalAmount(Map<TicketType, Integer> tickets, LocalDateTime screeningTime, String voucher) {
         Map<TicketType, BigDecimal> prices = ticketPricesService.getPrices(screeningTime);
-        BigDecimal totalAmount = tickets.entrySet()
+        BigDecimal totalAmount = calculateTotalAmount(tickets, prices);
+        if (isVoucherValid(voucher)) {
+            totalAmount = getTotalAmountWithDiscount(totalAmount);
+        }
+        return totalAmount;
+    }
+
+    private BigDecimal calculateTotalAmount(Map<TicketType, Integer> tickets, Map<TicketType, BigDecimal> prices) {
+        return tickets.entrySet()
                 .stream()
                 .map(entry -> prices.get(entry.getKey()).multiply(BigDecimal.valueOf(entry.getValue())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .setScale(2, RoundingMode.HALF_UP);
-        if (isVoucherValid(voucher)) {
-            totalAmount = totalAmount.multiply(voucherDiscountInPercent)
-                    .divide(percent, RoundingMode.HALF_UP);
-        }
-        return totalAmount;
+    }
+
+    private BigDecimal getTotalAmountWithDiscount(BigDecimal totalAmount) {
+        return totalAmount.multiply(voucherDiscountInPercent)
+                .divide(percent, RoundingMode.HALF_UP);
     }
 
     private boolean isVoucherValid(String voucher) {
