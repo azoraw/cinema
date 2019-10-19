@@ -1,12 +1,12 @@
 package com.zoraw.cinema.rest.dto;
 
 import com.zoraw.cinema.model.domain.Screening;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class ReservationFailureResponseDto extends ReservationResponseDto {
 
@@ -14,6 +14,7 @@ public class ReservationFailureResponseDto extends ReservationResponseDto {
     private static final String BAD_SEAT_CONFIGURATION_DESCRIPTION = "BAD_SEAT_CONFIGURATION_DESCRIPTION";
 
     private String failureDescription;
+    private Screening screening;
 
     public static ReservationFailureResponseDto createTooLateResponse() {
         return ReservationFailureResponseDto.builder()
