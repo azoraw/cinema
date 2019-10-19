@@ -19,5 +19,6 @@ public class ReservationDao {
     private String screeningId;
     private Set<SeatDao> seats;
     private Map<TicketType, Integer> tickets;
+    private String voucher;
 
 }

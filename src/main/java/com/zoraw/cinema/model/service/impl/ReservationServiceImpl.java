@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
@@ -38,12 +39,18 @@ class ReservationServiceImpl implements ReservationService {
 
         if (saved) {
             return ReservationResponseDto.builder()
-                    .amount(ticketPriceCalculationService.calculateTotalAmount(reservation.getTickets(), screening.getTime()))
+                    .amount(getAmount(reservation, screening))
                     .expirationTime(screening.getTime().minusMinutes(minimumMinutesBeforeScreening))
                     .build();
         }
 
-        return ReservationFailureResponseDto.createBadSeatConfigurationResponse(screeningService.getScreening(screeningId));
+        return ReservationFailureResponseDto.createBadSeatConfigurationResponse(
+                screeningService.getScreening(screeningId));
+    }
+
+    private BigDecimal getAmount(Reservation reservation, Screening screening) {
+        return ticketPriceCalculationService.calculateTotalAmount(
+                reservation.getTickets(), screening.getTime(), reservation.getVoucher());
     }
 
     private boolean isReservationTooLate(Screening screening) {

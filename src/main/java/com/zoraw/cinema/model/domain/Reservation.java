@@ -15,6 +15,7 @@ public class Reservation {
     private String screeningId;
     private Set<Seat> seats;
     private Map<TicketType, Integer> tickets;
+    private String voucher;
 
 
 }

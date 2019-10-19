@@ -8,5 +8,5 @@ import java.util.Map;
 
 public interface TicketPriceCalculationService {
 
-    BigDecimal calculateTotalAmount(Map<TicketType, Integer> tickets, LocalDateTime screeningTime);
+    BigDecimal calculateTotalAmount(Map<TicketType, Integer> tickets, LocalDateTime screeningTime, String voucher);
 }

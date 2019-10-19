@@ -2,10 +2,12 @@ package com.zoraw.cinema.model.service.impl;
 
 import com.zoraw.cinema.model.service.WeekendService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
+@Service
 public class WeekendServiceImpl implements WeekendService {
 
     @Value("${ticket.weekendStartHour}")

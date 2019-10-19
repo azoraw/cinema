@@ -35,4 +35,6 @@ public class ReservationDto {
 
     @Size(min = 1)
     private Map<TicketType, Integer> tickets;
+
+    private String voucher;
 }
