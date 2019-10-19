@@ -16,7 +16,7 @@ public class TicketProperties {
     private BigDecimal student;
     private BigDecimal child;
     private BigDecimal weekendPriceOffSet;
-    private BigDecimal voucherDiscount;
+    private BigDecimal voucherDiscountInPercent;
     private int weekendStartHour;
     private DayOfWeek weekendStartDay;
     private int weekendStopHour;
