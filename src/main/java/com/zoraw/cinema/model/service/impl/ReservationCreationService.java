@@ -1,8 +1,8 @@
-package com.zoraw.cinema.model.service;
+package com.zoraw.cinema.model.service.impl;
 
 import com.zoraw.cinema.model.domain.Reservation;
 
-public interface ReservationCreationService {
+interface ReservationCreationService {
 
     boolean create(Reservation reservation);
 }

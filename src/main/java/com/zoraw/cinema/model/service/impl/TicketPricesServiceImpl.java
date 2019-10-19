@@ -1,8 +1,6 @@
 package com.zoraw.cinema.model.service.impl;
 
 import com.zoraw.cinema.model.domain.TicketType;
-import com.zoraw.cinema.model.service.TicketPricesService;
-import com.zoraw.cinema.model.service.WeekendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
-public class TicketPricesServiceImpl implements TicketPricesService {
+class TicketPricesServiceImpl implements TicketPricesService {
 
     private final WeekendService weekendService;
 

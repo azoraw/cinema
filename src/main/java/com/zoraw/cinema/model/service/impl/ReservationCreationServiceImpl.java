@@ -9,7 +9,6 @@ import com.zoraw.cinema.model.domain.Reservation;
 import com.zoraw.cinema.model.domain.Screening;
 import com.zoraw.cinema.model.domain.Seat;
 import com.zoraw.cinema.model.exception.ScreeningNotFoundException;
-import com.zoraw.cinema.model.service.ReservationCreationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
-public class ReservationCreationServiceImpl implements ReservationCreationService {
+class ReservationCreationServiceImpl implements ReservationCreationService {
 
     private final ScreeningRepository screeningRepository;
     private final ReservationRepository reservationRepository;

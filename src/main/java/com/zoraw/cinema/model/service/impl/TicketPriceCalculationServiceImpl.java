@@ -1,8 +1,6 @@
 package com.zoraw.cinema.model.service.impl;
 
 import com.zoraw.cinema.model.domain.TicketType;
-import com.zoraw.cinema.model.service.TicketPriceCalculationService;
-import com.zoraw.cinema.model.service.TicketPricesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class TicketPriceCalculationServiceImpl implements TicketPriceCalculationService {
+class TicketPriceCalculationServiceImpl implements TicketPriceCalculationService {
 
     private final TicketPricesService ticketPricesService;
     private final BigDecimal percent = new BigDecimal("100");

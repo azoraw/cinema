@@ -1,7 +1,7 @@
-package com.zoraw.cinema.model.service;
+package com.zoraw.cinema.model.service.impl;
 
 import java.time.LocalDateTime;
 
-public interface WeekendService {
+interface WeekendService {
     boolean isWeekend(LocalDateTime dateTime);
 }
