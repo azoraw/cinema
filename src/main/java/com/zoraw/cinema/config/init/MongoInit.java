@@ -52,6 +52,17 @@ public class MongoInit implements CommandLineRunner {
                         .build());
             }
         }
+        screeningRepository.save((ScreeningDao.builder()
+                .movie(MovieDao.builder()
+                        .title(movies[0])
+                        .build())
+                .time(LocalDateTime.of(2020, Month.MAY, 6, 20, 0))
+                .id("testId")
+                .room(RoomDao.builder()
+                        .name(String.valueOf(1))
+                        .seats(seatDaoArrangement)
+                        .build())
+                .build()));
     }
 
     private int getRandomDayOfMonth(Random random, int roomIndex) {
