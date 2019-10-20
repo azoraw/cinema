@@ -1,13 +1,13 @@
 package com.zoraw.cinema.rest.dto;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
+@SuperBuilder
 public class ReservationResponseDto {
 
     private BigDecimal amount;

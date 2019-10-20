@@ -1,12 +1,12 @@
 package com.zoraw.cinema.rest.dto;
 
 import com.zoraw.cinema.model.domain.Screening;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class ReservationFailureResponseDto extends ReservationResponseDto {
 
